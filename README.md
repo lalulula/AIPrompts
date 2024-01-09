@@ -163,4 +163,7 @@ Key Features of NextJS:
 
 1. Tailwind Css classNames
    - 기본적으로 주어지는 클래스 이름에 맞게 css가 입혀짐, 모를경우 검색 ex) https://tailwindcss.com/docs/width
+2. 규칙
+   - "class_name" :우리가 제공하는 이름 "class-name" : tailwind 사용하는 이름
+
 # AIPrompts

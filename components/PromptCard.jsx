@@ -32,13 +32,24 @@ const PromptCard = ({ prompt, handleEdit, handleDelete }) => {
           className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
           onClick={handleProfileClick}
         >
-          <Image
-            src={prompt.creator.image}
-            alt="UserImage"
-            width={40}
-            height={40}
-            className="rounded-full object-contain"
-          />
+          {prompt.creator?.image ? (
+            <Image
+              src={prompt.creator.image}
+              alt="User Image"
+              width={40}
+              height={40}
+              className="rounded-full object-contain"
+            />
+          ) : (
+            <Image
+              src="/assets/images/defaultProfile.png"
+              alt="User Image"
+              width={40}
+              height={40}
+              className="rounded-full object-contain"
+            />
+          )}
+
           <div className="flex flex-col">
             <h3 className="font-satoshi font-semibold text-gray-900">
               {prompt.creator.username}

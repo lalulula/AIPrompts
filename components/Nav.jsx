@@ -8,6 +8,7 @@ const Nav = () => {
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
   useEffect(() => {
+    console.log(session?.user.image);
     //For Google-Next Auth
     const setUpProviders = async () => {
       const response = await getProviders();

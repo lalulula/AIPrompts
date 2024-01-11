@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
+const PromptCard = ({ prompt, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -13,16 +13,28 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
     navigator.clipboard.writeText(prompt.prompt);
     setTimeout(() => setCopied(""), 3000);
   };
-  // useEffect(() => {
-  //   console.log(prompt.tags);
-  // }, []);
+  const handleProfileClick = () => {
+    console.log(prompt);
+    console.log(session);
+    if (prompt.creator._id === session?.user.id) router.push("/profile");
+    else
+      router.push(
+        `/profile/${prompt.creator._id}?name=${prompt.creator.username}`
+      );
+  };
+  useEffect(() => {
+    console.log(prompt.creator);
+  }, []);
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+        <div
+          className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+          onClick={handleProfileClick}
+        >
           <Image
             src={prompt.creator.image}
-            alt="user_image"
+            alt="UserImage"
             width={40}
             height={40}
             className="rounded-full object-contain"
@@ -38,6 +50,7 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
         </div>
         <div className="copy_btn" onClick={handleCopy}>
           <Image
+            alt="Copy"
             src={
               copied === prompt.prompt
                 ? "/assets/icons/tick.svg"
@@ -53,12 +66,7 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
         {prompt.tags && prompt.tags.length > 0 && (
           <>
             {prompt.tags.map((tag, index) => (
-              <span
-                onClick={() => handleTagClick && handleTagClick(prompt.tag)}
-                key={index}
-              >
-                #{tag.trim()}{" "}
-              </span>
+              <span key={index}>#{tag.trim()} </span>
             ))}
           </>
         )}

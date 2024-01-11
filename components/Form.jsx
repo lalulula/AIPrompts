@@ -28,16 +28,37 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             className="form_textarea"
           />
         </label>
-        <label>
+        {/* <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Tag{" "}
+            Tags{" "}
             <span className="font-normal">(#product, #webdev, #idea...)</span>
           </span>
           <input
-            value={post.tag}
-            onChange={(e) => setPost({ ...post, tag: e.target.value })}
+            value={post.tags.join(", ")}
+            onChange={(e) =>
+              setPost({ ...post, tags: e.target.value.split(", ") })
+            }
             required
-            placeholder="#tag"
+            placeholder="tag"
+            className="form_input"
+          />
+        </label> */}
+        <label>
+          <span className="font-satoshi font-semibold text-base text-gray-700">
+            Tags{" "}
+            <span className="font-normal">(#product, #webdev, #idea...)</span>
+            <span className="font-normal">(seperate tags with comma(,))</span>
+          </span>
+          <input
+            value={post.tags.join(", ")}
+            onChange={(e) =>
+              setPost({
+                ...post,
+                tags: e.target.value.split(",").map((tag) => tag.trim()),
+              })
+            }
+            required
+            placeholder="tag"
             className="form_input"
           />
         </label>

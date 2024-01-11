@@ -11,7 +11,7 @@ export const connectToDB = async () => {
     await mongoose.connect(process.env.MONGODB_URI, {
       // bufferCommands: false,
       dbName: "AI_Prompt",
-      useNewUrlParser: true,
+      // useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     isConnected = true;

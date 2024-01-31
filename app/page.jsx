@@ -1,4 +1,5 @@
 import Feed from "@components/Feed";
+import CreatePrompt from "./create-prompt/page";
 
 const Home = () => (
   <section className="w-full flex-center flex-col">
